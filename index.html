@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Typography & Utilities | Week 2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .header-section {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 60px 0;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .section-title {
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        
+        .code-container {
+            background: #2d3748;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background: #4a5568;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copy-btn {
+            background: var(--success-gradient);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .example-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .nav-tabs .nav-link {
+            border-radius: 15px 15px 0 0;
+            border: none;
+            background: linear-gradient(135deg, #e2e2e2, #c9c9c9);
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+        
+        .practice-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .instructor-badge {
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        pre {
+            background: #1a202c !important;
+            border-radius: 10px;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .live-example {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            background: rgba(255,255,255,0.8);
+        }
+        
+        .utility-demo {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #dee2e6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">Bootstrap Typography & Utilities</h1>
+                    <p class="lead fs-5">Master Bootstrap's powerful utility classes for typography, colors, spacing, and positioning</p>
+                    <div class="instructor-badge">
+                        <i class="fas fa-chalkboard-teacher me-2"></i>
+                        Instructor: Anas Yousaf | Week 2 - Bootstrap Lecture 2 | Dot and Cross Technology
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fas fa-code fa-5x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold" id="typography-tab" data-bs-toggle="tab" data-bs-target="#typography" type="button">
+                    <i class="fas fa-font me-2"></i>Typography
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="colors-tab" data-bs-toggle="tab" data-bs-target="#colors" type="button">
+                    <i class="fas fa-palette me-2"></i>Colors & Backgrounds
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="spacing-tab" data-bs-toggle="tab" data-bs-target="#spacing" type="button">
+                    <i class="fas fa-arrows-alt me-2"></i>Spacing
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="display-tab" data-bs-toggle="tab" data-bs-target="#display" type="button">
+                    <i class="fas fa-layer-group me-2"></i>Display & Position
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="practice-tab" data-bs-toggle="tab" data-bs-target="#practice" type="button">
+                    <i class="fas fa-laptop-code me-2"></i>Practice
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="mainTabContent">
+            <!-- Typography Section -->
+            <div class="tab-pane fade show active animate-fade-in" id="typography" role="tabpanel">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h2 class="section-title display-6">Bootstrap Typography Classes</h2>
+                        
+                        <!-- Headings -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Headings & Display Classes</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;!-- Standard Headings --&gt;
+&lt;h1 class="display-1"&gt;Display 1&lt;/h1&gt;
+&lt;h2 class="display-2"&gt;Display 2&lt;/h2&gt;
+&lt;h3 class="display-3"&gt;Display 3&lt;/h3&gt;
+&lt;h4 class="display-4"&gt;Display 4&lt;/h4&gt;
+
+&lt;!-- Font Weight --&gt;
+&lt;p class="fw-bold"&gt;Bold text&lt;/p&gt;
+&lt;p class="fw-normal"&gt;Normal weight&lt;/p&gt;
+&lt;p class="fw-light"&gt;Light weight&lt;/p&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <h1 class="display-1">Display 1</h1>
+                                <h2 class="display-2">Display 2</h2>
+                                <h3 class="display-3">Display 3</h3>
+                                <h4 class="display-4">Display 4</h4>
+                                <hr>
+                                <p class="fw-bold">This is bold text</p>
+                                <p class="fw-normal">This is normal weight text</p>
+                                <p class="fw-light">This is light weight text</p>
+                            </div>
+                        </div>
+
+                        <!-- Text Alignment -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Text Alignment & Transform</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;!-- Text Alignment --&gt;
+&lt;p class="text-start"&gt;Start aligned text&lt;/p&gt;
+&lt;p class="text-center"&gt;Center aligned text&lt;/p&gt;
+&lt;p class="text-end"&gt;End aligned text&lt;/p&gt;
+
+&lt;!-- Text Transform --&gt;
+&lt;p class="text-lowercase"&gt;LOWERCASED TEXT&lt;/p&gt;
+&lt;p class="text-uppercase"&gt;uppercased text&lt;/p&gt;
+&lt;p class="text-capitalize"&gt;capitalized text&lt;/p&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <p class="text-start border p-2">Start aligned text</p>
+                                <p class="text-center border p-2">Center aligned text</p>
+                                <p class="text-end border p-2">End aligned text</p>
+                                <hr>
+                                <p class="text-lowercase">LOWERCASED TEXT</p>
+                                <p class="text-uppercase">uppercased text</p>
+                                <p class="text-capitalize">capitalized text</p>
+                            </div>
+                        </div>
+
+                        <!-- Font Sizes -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Font Sizes</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;p class="fs-1"&gt;Font size 1&lt;/p&gt;
+&lt;p class="fs-2"&gt;Font size 2&lt;/p&gt;
+&lt;p class="fs-3"&gt;Font size 3&lt;/p&gt;
+&lt;p class="fs-4"&gt;Font size 4&lt;/p&gt;
+&lt;p class="fs-5"&gt;Font size 5&lt;/p&gt;
+&lt;p class="fs-6"&gt;Font size 6&lt;/p&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <p class="fs-1">Font size 1 - Largest</p>
+                                <p class="fs-2">Font size 2</p>
+                                <p class="fs-3">Font size 3</p>
+                                <p class="fs-4">Font size 4</p>
+                                <p class="fs-5">Font size 5</p>
+                                <p class="fs-6">Font size 6 - Smallest</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colors & Backgrounds Section -->
+            <div class="tab-pane fade animate-fade-in" id="colors" role="tabpanel">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h2 class="section-title display-6">Color & Background Utilities</h2>
+                        
+                        <!-- Text Colors -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Text Colors</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;p class="text-primary"&gt;Primary text&lt;/p&gt;
+&lt;p class="text-secondary"&gt;Secondary text&lt;/p&gt;
+&lt;p class="text-success"&gt;Success text&lt;/p&gt;
+&lt;p class="text-danger"&gt;Danger text&lt;/p&gt;
+&lt;p class="text-warning"&gt;Warning text&lt;/p&gt;
+&lt;p class="text-info"&gt;Info text&lt;/p&gt;
+&lt;p class="text-dark"&gt;Dark text&lt;/p&gt;
+&lt;p class="text-muted"&gt;Muted text&lt;/p&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="text-primary fw-bold">Primary text</p>
+                                        <p class="text-secondary fw-bold">Secondary text</p>
+                                        <p class="text-success fw-bold">Success text</p>
+                                        <p class="text-danger fw-bold">Danger text</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="text-warning fw-bold">Warning text</p>
+                                        <p class="text-info fw-bold">Info text</p>
+                                        <p class="text-dark fw-bold">Dark text</p>
+                                        <p class="text-muted fw-bold">Muted text</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Background Colors -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Background Colors</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;div class="bg-primary text-white p-3"&gt;Primary background&lt;/div&gt;
+&lt;div class="bg-secondary text-white p-3"&gt;Secondary background&lt;/div&gt;
+&lt;div class="bg-success text-white p-3"&gt;Success background&lt;/div&gt;
+&lt;div class="bg-danger text-white p-3"&gt;Danger background&lt;/div&gt;
+&lt;div class="bg-warning text-dark p-3"&gt;Warning background&lt;/div&gt;
+&lt;div class="bg-info text-white p-3"&gt;Info background&lt;/div&gt;
+&lt;div class="bg-light text-dark p-3"&gt;Light background&lt;/div&gt;
+&lt;div class="bg-dark text-white p-3"&gt;Dark background&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <div class="bg-primary text-white p-3 rounded mb-2">Primary background</div>
+                                        <div class="bg-secondary text-white p-3 rounded mb-2">Secondary background</div>
+                                        <div class="bg-success text-white p-3 rounded mb-2">Success background</div>
+                                        <div class="bg-danger text-white p-3 rounded mb-2">Danger background</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="bg-warning text-dark p-3 rounded mb-2">Warning background</div>
+                                        <div class="bg-info text-white p-3 rounded mb-2">Info background</div>
+                                        <div class="bg-light text-dark p-3 rounded mb-2 border">Light background</div>
+                                        <div class="bg-dark text-white p-3 rounded mb-2">Dark background</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spacing Section -->
+            <div class="tab-pane fade animate-fade-in" id="spacing" role="tabpanel">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h2 class="section-title display-6">Spacing Utilities</h2>
+                        
+                        <!-- Margin -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Margin Classes</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;!-- Margin All Sides --&gt;
+&lt;div class="m-0"&gt;No margin&lt;/div&gt;
+&lt;div class="m-3"&gt;Margin 3&lt;/div&gt;
+&lt;div class="m-5"&gt;Margin 5&lt;/div&gt;
+
+&lt;!-- Specific Sides --&gt;
+&lt;div class="mt-3"&gt;Margin top 3&lt;/div&gt;
+&lt;div class="mb-3"&gt;Margin bottom 3&lt;/div&gt;
+&lt;div class="ms-3"&gt;Margin start 3&lt;/div&gt;
+&lt;div class="me-3"&gt;Margin end 3&lt;/div&gt;
+&lt;div class="mx-3"&gt;Margin horizontal 3&lt;/div&gt;
+&lt;div class="my-3"&gt;Margin vertical 3&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <div class="border p-2 mb-2">
+                                    <div class="bg-light border m-0 p-2">No margin (m-0)</div>
+                                </div>
+                                <div class="border p-2 mb-2">
+                                    <div class="bg-light border m-3 p-2">Margin 3 (m-3)</div>
+                                </div>
+                                <div class="border p-2 mb-2">
+                                    <div class="bg-light border mx-auto p-2" style="width: 200px;">Margin horizontal auto (mx-auto)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Padding -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Padding Classes</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;!-- Padding All Sides --&gt;
+&lt;div class="p-0"&gt;No padding&lt;/div&gt;
+&lt;div class="p-3"&gt;Padding 3&lt;/div&gt;
+&lt;div class="p-5"&gt;Padding 5&lt;/div&gt;
+
+&lt;!-- Specific Sides --&gt;
+&lt;div class="pt-3"&gt;Padding top 3&lt;/div&gt;
+&lt;div class="pb-3"&gt;Padding bottom 3&lt;/div&gt;
+&lt;div class="ps-3"&gt;Padding start 3&lt;/div&gt;
+&lt;div class="pe-3"&gt;Padding end 3&lt;/div&gt;
+&lt;div class="px-3"&gt;Padding horizontal 3&lt;/div&gt;
+&lt;div class="py-3"&gt;Padding vertical 3&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="bg-primary text-white p-0 border rounded">No padding (p-0)</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="bg-success text-white p-3 border rounded">Padding 3 (p-3)</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="bg-warning text-dark p-5 border rounded">Padding 5 (p-5)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Spacing Scale -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Spacing Scale Reference</h3>
+                            
+                            <div class="example-section">
+                                <h5 class="fw-bold mb-3">Bootstrap Spacing Scale:</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li><strong>0</strong> = 0rem (0px)</li>
+                                            <li><strong>1</strong> = 0.25rem (4px)</li>
+                                            <li><strong>2</strong> = 0.5rem (8px)</li>
+                                            <li><strong>3</strong> = 1rem (16px)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li><strong>4</strong> = 1.5rem (24px)</li>
+                                            <li><strong>5</strong> = 3rem (48px)</li>
+                                            <li><strong>auto</strong> = auto</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display & Position Section -->
+            <div class="tab-pane fade animate-fade-in" id="display" role="tabpanel">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h2 class="section-title display-6">Display & Positioning Utilities</h2>
+                        
+                        <!-- Display -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Display Utilities</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;div class="d-none"&gt;Hidden element&lt;/div&gt;
+&lt;div class="d-block"&gt;Block element&lt;/div&gt;
+&lt;div class="d-inline"&gt;Inline element&lt;/div&gt;
+&lt;div class="d-inline-block"&gt;Inline-block element&lt;/div&gt;
+&lt;div class="d-flex"&gt;Flex container&lt;/div&gt;
+&lt;div class="d-grid"&gt;Grid container&lt;/div&gt;
+
+&lt;!-- Responsive Display --&gt;
+&lt;div class="d-none d-md-block"&gt;Hidden on small, visible on medium+&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <div class="mb-3">
+                                    <span class="utility-demo d-block bg-primary text-white">Block element</span>
+                                    <span class="utility-demo d-inline bg-success text-white">Inline element</span>
+                                    <span class="utility-demo d-inline bg-success text-white">Inline element</span>
+                                </div>
+                                <div class="d-flex gap-2 mb-3">
+                                    <div class="utility-demo bg-warning flex-fill">Flex item 1</div>
+                                    <div class="utility-demo bg-info text-white flex-fill">Flex item 2</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Position -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Position Utilities</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;div class="position-static"&gt;Static position&lt;/div&gt;
+&lt;div class="position-relative"&gt;Relative position&lt;/div&gt;
+&lt;div class="position-absolute"&gt;Absolute position&lt;/div&gt;
+&lt;div class="position-fixed"&gt;Fixed position&lt;/div&gt;
+&lt;div class="position-sticky"&gt;Sticky position&lt;/div&gt;
+
+&lt;!-- Position with directions --&gt;
+&lt;div class="position-absolute top-0 start-0"&gt;Top left&lt;/div&gt;
+&lt;div class="position-absolute top-0 end-0"&gt;Top right&lt;/div&gt;
+&lt;div class="position-absolute bottom-0 start-0"&gt;Bottom left&lt;/div&gt;
+&lt;div class="position-absolute bottom-0 end-0"&gt;Bottom right&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <div class="position-relative border" style="height: 200px; background: #f8f9fa;">
+                                    <div class="position-absolute top-0 start-0 bg-primary text-white p-2 rounded">Top Left</div>
+                                    <div class="position-absolute top-0 end-0 bg-success text-white p-2 rounded">Top Right</div>
+                                    <div class="position-absolute bottom-0 start-0 bg-warning text-dark p-2 rounded">Bottom Left</div>
+                                    <div class="position-absolute bottom-0 end-0 bg-danger text-white p-2 rounded">Bottom Right</div>
+                                    <div class="position-absolute top-50 start-50 translate-middle bg-info text-white p-2 rounded">Center</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flexbox Utilities -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold text-primary mb-3">Flexbox Utilities</h3>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>HTML</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;!-- Justify Content --&gt;
+&lt;div class="d-flex justify-content-start"&gt;Start&lt;/div&gt;
+&lt;div class="d-flex justify-content-center"&gt;Center&lt;/div&gt;
+&lt;div class="d-flex justify-content-end"&gt;End&lt;/div&gt;
+&lt;div class="d-flex justify-content-between"&gt;Between&lt;/div&gt;
+&lt;div class="d-flex justify-content-around"&gt;Around&lt;/div&gt;
+
+&lt;!-- Align Items --&gt;
+&lt;div class="d-flex align-items-start"&gt;Start&lt;/div&gt;
+&lt;div class="d-flex align-items-center"&gt;Center&lt;/div&gt;
+&lt;div class="d-flex align-items-end"&gt;End&lt;/div&gt;</code></pre>
+                            </div>
+
+                            <div class="live-example">
+                                <h4 class="mb-3 text-primary">Live Example:</h4>
+                                <div class="mb-3">
+                                    <p class="fw-bold">Justify Content:</p>
+                                    <div class="d-flex justify-content-between border p-2 mb-2" style="height: 60px;">
+                                        <div class="bg-primary text-white p-2 rounded">Item 1</div>
+                                        <div class="bg-success text-white p-2 rounded">Item 2</div>
+                                        <div class="bg-warning text-dark p-2 rounded">Item 3</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="fw-bold">Align Items Center:</p>
+                                    <div class="d-flex align-items-center border p-2" style="height: 100px;">
+                                        <div class="bg-info text-white p-2 rounded me-2">Tall Item</div>
+                                        <div class="bg-secondary text-white p-2 rounded">Short</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practice Section -->
+            <div class="tab-pane fade animate-fade-in" id="practice" role="tabpanel">
+                <div class="practice-card">
+                    <h2 class="section-title display-6">Class Practice & Home Task</h2>
+                    
+                    <!-- Class Practice -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="card-title mb-0"><i class="fas fa-laptop-code me-2"></i>Class Practice</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-3">Task: Style a Content Page using Bootstrap Utility Classes</h5>
+                            
+                            <div class="code-container mb-3">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>Practice Template</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Content Page Practice&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container my-5"&gt;
+        &lt;!-- Header Section --&gt;
+        &lt;header class="text-center mb-5"&gt;
+            &lt;h1 class="display-4 text-primary fw-bold"&gt;My Content Page&lt;/h1&gt;
+            &lt;p class="lead text-muted"&gt;Practicing Bootstrap utility classes&lt;/p&gt;
+        &lt;/header&gt;
+
+        &lt;!-- Main Content --&gt;
+        &lt;main class="row"&gt;
+            &lt;article class="col-lg-8"&gt;
+                &lt;h2 class="fs-1 text-success mb-4"&gt;Main Article&lt;/h2&gt;
+                &lt;p class="fs-5 lh-lg"&gt;This is the main content area where you can practice various Bootstrap utility classes.&lt;/p&gt;
+                
+                &lt;div class="bg-light p-4 rounded mb-4"&gt;
+                    &lt;h3 class="text-warning"&gt;Highlighted Section&lt;/h3&gt;
+                    &lt;p class="text-dark"&gt;Use background and text color utilities here.&lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;div class="d-flex justify-content-between align-items-center p-3 border"&gt;
+                    &lt;span class="badge bg-primary"&gt;Tag 1&lt;/span&gt;
+                    &lt;span class="badge bg-secondary"&gt;Tag 2&lt;/span&gt;
+                    &lt;span class="badge bg-success"&gt;Tag 3&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/article&gt;
+
+            &lt;aside class="col-lg-4"&gt;
+                &lt;div class="position-sticky" style="top: 20px;"&gt;
+                    &lt;h3 class="fs-4 text-info mb-3"&gt;Sidebar&lt;/h3&gt;
+                    &lt;div class="list-group"&gt;
+                        &lt;a href="#" class="list-group-item list-group-item-action"&gt;Link 1&lt;/a&gt;
+                        &lt;a href="#" class="list-group-item list-group-item-action"&gt;Link 2&lt;/a&gt;
+                        &lt;a href="#" class="list-group-item list-group-item-action"&gt;Link 3&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/aside&gt;
+        &lt;/main&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Home Task -->
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="card-title mb-0"><i class="fas fa-home me-2"></i>Home Task</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-3">Assignment: Create a Styled Article Page</h5>
+                            <div class="alert alert-info">
+                                <h6 class="fw-bold">Requirements:</h6>
+                                <ul class="mb-0">
+                                    <li>Use Bootstrap display classes for headings</li>
+                                    <li>Apply proper typography hierarchy (h1-h6)</li>
+                                    <li>Use color utilities for text and backgrounds</li>
+                                    <li>Apply spacing utilities for proper layout</li>
+                                    <li>Use flexbox utilities for component alignment</li>
+                                    <li>Make it responsive with display utilities</li>
+                                </ul>
+                            </div>
+
+                            <div class="code-container">
+                                <div class="code-header">
+                                    <span class="text-light"><i class="fab fa-html5 me-2"></i>Home Task Template</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">
+                                        <i class="fas fa-copy me-1"></i>Copy
+                                    </button>
+                                </div>
+                                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Article Page&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body class="bg-light"&gt;
+    &lt;!-- Navigation --&gt;
+    &lt;nav class="navbar navbar-dark bg-dark"&gt;
+        &lt;div class="container"&gt;
+            &lt;a class="navbar-brand fw-bold" href="#"&gt;My Blog&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- Hero Section --&gt;
+    &lt;section class="bg-primary text-white py-5"&gt;
+        &lt;div class="container text-center"&gt;
+            &lt;h1 class="display-2 fw-bold mb-3"&gt;Article Title&lt;/h1&gt;
+            &lt;p class="lead fs-4"&gt;Subtitle or brief description&lt;/p&gt;
+            &lt;div class="d-flex justify-content-center gap-3 mt-4"&gt;
+                &lt;span class="badge bg-light text-dark fs-6 px-3 py-2"&gt;Technology&lt;/span&gt;
+                &lt;span class="badge bg-light text-dark fs-6 px-3 py-2"&gt;Bootstrap&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Main Content --&gt;
+    &lt;main class="container my-5"&gt;
+        &lt;div class="row"&gt;
+            &lt;article class="col-lg-8 mx-auto"&gt;
+                &lt;!-- Article Meta --&gt;
+                &lt;div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-white rounded shadow-sm"&gt;
+                    &lt;div&gt;
+                        &lt;small class="text-muted"&gt;Published on&lt;/small&gt;
+                        &lt;div class="fw-bold"&gt;January 15, 2024&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="text-end"&gt;
+                        &lt;small class="text-muted"&gt;By&lt;/small&gt;
+                        &lt;div class="fw-bold text-primary"&gt;Anas Yousaf&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Article Content --&gt;
+                &lt;div class="bg-white p-5 rounded shadow-sm"&gt;
+                    &lt;h2 class="fs-1 text-dark mb-4"&gt;Introduction&lt;/h2&gt;
+                    &lt;p class="fs-5 lh-lg text-dark mb-4"&gt;
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    &lt;/p&gt;
+
+                    &lt;h3 class="fs-2 text-success mt-5 mb-3"&gt;Key Points&lt;/h3&gt;
+                    &lt;div class="row g-4 my-4"&gt;
+                        &lt;div class="col-md-6"&gt;
+                            &lt;div class="bg-info bg-opacity-10 p-4 rounded h-100"&gt;
+                                &lt;h4 class="text-info fs-4 mb-3"&gt;Point One&lt;/h4&gt;
+                                &lt;p class="text-dark"&gt;Description of the first key point.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class="col-md-6"&gt;
+                            &lt;div class="bg-warning bg-opacity-10 p-4 rounded h-100"&gt;
+                                &lt;h4 class="text-warning fs-4 mb-3"&gt;Point Two&lt;/h4&gt;
+                                &lt;p class="text-dark"&gt;Description of the second key point.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;h3 class="fs-2 text-danger mt-5 mb-3"&gt;Conclusion&lt;/h3&gt;
+                    &lt;p class="fs-5 lh-lg text-dark"&gt;
+                        Final thoughts and summary of the article content.
+                    &lt;/p&gt;
+
+                    &lt;!-- Call to Action --&gt;
+                    &lt;div class="bg-primary bg-opacity-10 p-4 rounded mt-5"&gt;
+                        &lt;div class="d-flex justify-content-between align-items-center"&gt;
+                            &lt;div&gt;
+                                &lt;h5 class="text-primary fw-bold mb-1"&gt;Enjoyed this article?&lt;/h5&gt;
+                                &lt;p class="text-muted mb-0"&gt;Share it with others or leave a comment&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;div&gt;
+                                &lt;button class="btn btn-primary me-2"&gt;Share&lt;/button&gt;
+                                &lt;button class="btn btn-outline-primary"&gt;Comment&lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/article&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+
+    &lt;!-- Footer --&gt;
+    &lt;footer class="bg-dark text-white text-center py-4 mt-5"&gt;
+        &lt;div class="container"&gt;
+            &lt;p class="mb-0"&gt;&copy; 2024 Dot and Cross Technology. All rights reserved.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Reference Card -->
+        <div class="card mt-5">
+            <div class="card-header bg-gradient text-white" style="background: var(--primary-gradient);">
+                <h3 class="card-title mb-0"><i class="fas fa-bookmark me-2"></i>Quick Reference Cheat Sheet</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="text-primary fw-bold">Typography</h5>
+                        <ul class="list-unstyled small">
+                            <li><code>.display-1</code> to <code>.display-6</code></li>
+                            <li><code>.fs-1</code> to <code>.fs-6</code></li>
+                            <li><code>.fw-bold</code>, <code>.fw-normal</code></li>
+                            <li><code>.text-center</code>, <code>.text-start</code></li>
+                            <li><code>.text-uppercase</code>, <code>.text-lowercase</code></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="text-success fw-bold">Colors</h5>
+                        <ul class="list-unstyled small">
+                            <li><code>.text-primary</code>, <code>.text-secondary</code></li>
+                            <li><code>.text-success</code>, <code>.text-danger</code></li>
+                            <li><code>.bg-primary</code>, <code>.bg-light</code></li>
+                            <li><code>.bg-warning</code>, <code>.bg-dark</code></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="text-warning fw-bold">Spacing</h5>
+                        <ul class="list-unstyled small">
+                            <li><code>.m-{size}</code> - margin</li>
+                            <li><code>.p-{size}</code> - padding</li>
+                            <li><code>.mt-</code>, <code>.mb-</code>, <code>.ms-</code>, <code>.me-</code></li>
+                            <li><code>.mx-</code> (horizontal), <code>.my-</code> (vertical)</li>
+                            <li>Sizes: 0, 1, 2, 3, 4, 5, auto</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="text-info fw-bold">Display & Position</h5>
+                        <ul class="list-unstyled small">
+                            <li><code>.d-block</code>, <code>.d-inline</code></li>
+                            <li><code>.d-flex</code>, <code>.d-grid</code></li>
+                            <li><code>.position-relative</code></li>
+                            <li><code>.justify-content-center</code></li>
+                            <li><code>.align-items-center</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-container').querySelector('code');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+                button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = 'var(--success-gradient)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy code. Please select and copy manually.');
+            });
+        }
+
+        // Add fade-in animation to tab content
+        document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
+            tab.addEventListener('shown.bs.tab', function (event) {
+                const targetPane = document.querySelector(event.target.getAttribute('data-bs-target'));
+                targetPane.classList.add('animate-fade-in');
+                
+                setTimeout(() => {
+                    targetPane.classList.remove('animate-fade-in');
+                }, 600);
+            });
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+</body>
+</html>
